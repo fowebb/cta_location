@@ -52,7 +52,7 @@ def fetch_train_locations(route_id):
     if response.status_code != 200:
         print("Something went awry! Requests status code {}".format(response.status_code))
 
-    soup = BeautifulSoup(response.text)
+    soup = BeautifulSoup(response.text, "html5lib")
 
     timestamp = datetime.strptime(soup.find('tmst').text, "%Y%m%d %H:%M:%S")
     trains = soup.find_all('train')
