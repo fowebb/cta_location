@@ -13,7 +13,7 @@ def mongo_insert(train_loc_data):
     """Upsert train_loc_data into mongo."""
     client = MongoClient('localhost', 27017)
     db = client['cta']
-    collection = db['train_locations']
+    collection = db['purp_locations']
     collection.insert(train_loc_data)
 
 
@@ -76,7 +76,7 @@ if __name__ == '__main__':
         """Call ingestion function."""
         current_time = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
         print "[{}] Ingesting CTA Train Locations...".format(current_time)
-        fetch_train_locations("Red")
+        fetch_train_locations("P")
         sc.enter(60, 1, ingest_train_locations, (sc,))
 
     s.enter(60, 1, ingest_train_locations, (s,))
