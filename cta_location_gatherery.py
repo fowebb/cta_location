@@ -60,7 +60,7 @@ def fetch_train_locations(route_id):
     train_locations = []
     for t in trains:
         t_data = {}
-        t['line'] = route_id
+        t_data['line'] = route_id
         t_data['timestamp'] = timestamp
         for data in t.children:
             t_data[data.name] = str(data.string)
