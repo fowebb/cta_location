@@ -52,7 +52,7 @@ def fetch_train_locations(route_id):
     if response.status_code != 200:
         print("Something went awry! Requests status code {}".format(response.status_code))
 
-    soup = BeautifulSoup(response.text, "html5lib")
+    soup = BeautifulSoup(response.text, "xml")
 
     timestamp = datetime.strptime(soup.find('tmst').text, "%Y%m%d %H:%M:%S")
     trains = soup.find_all('train')
@@ -76,10 +76,10 @@ if __name__ == '__main__':
         """Call ingestion function."""
         current_time = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
         print "[{}] Ingesting CTA Train Locations...".format(current_time)
-        fetch_train_locations("P")
+        fetch_train_locations("red")
         sc.enter(60, 1, ingest_train_locations, (sc,))
 
     s.enter(60, 1, ingest_train_locations, (s,))
     s.run()
     # Fetch Red Line train locations
-    # red_line_locations = fetch_train_locations("Red")
+    # red_line_locations = fetch_train_locations("red")
