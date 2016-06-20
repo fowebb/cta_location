@@ -77,7 +77,7 @@ if __name__ == '__main__':
         """Call ingestion function."""
         current_time = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
         print "[{}] Ingesting CTA Train Locations...".format(current_time)
-        fetch_train_locations("red")
+        fetch_train_locations("p")
         sc.enter(60, 1, ingest_train_locations, (sc,))
 
     s.enter(60, 1, ingest_train_locations, (s,))
