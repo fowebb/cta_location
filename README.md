@@ -1,6 +1,6 @@
 :steam_locomotive:  cta_location :steam_locomotive:
 ====================================================================
-## Fetch train location data from CTA API and store in MongoDB.
+### Fetch train location data from CTA API and store in MongoDB.
 
 
 <p align="center">
