@@ -1,16 +1,16 @@
 """Fetches train location data from CTA API."""
 from bs4 import BeautifulSoup
 from datetime import datetime
-from pprint import pprint
-import pymongo
-from pymongo import MongoClient
+from pymongo import MongoClien
 import requests
 import sched
 import time
 
+from env import CTA_API_KEY
+
 
 def mongo_insert(train_loc_data):
-    """Upsert train_loc_data into mongo."""
+    """Upsert train_loc_data into MongoDB running on localhost."""
     client = MongoClient('localhost', 27017)
     db = client['cta']
     collection = db['train_locations']
@@ -45,8 +45,8 @@ def fetch_train_locations(route_id):
     Returns:
         locations (list): List of dicts with train info and locations
     """
-    location_api_url = "http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=c3fb3a60af5d4980910acc149062beb9&rt={}"
-    request_url = location_api_url.format(route_id)
+    location_api_url = "http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key={api_key}&rt={route}"
+    request_url = location_api_url.format(api_key=CTA_API_KEY, route=route_id)
 
     response = requests.get(request_url)
     if response.status_code != 200:
@@ -67,7 +67,6 @@ def fetch_train_locations(route_id):
         train_locations.append(t_data)
 
     mongo_insert(train_locations)
-    # return train_locations
 
 
 if __name__ == '__main__':
@@ -82,5 +81,3 @@ if __name__ == '__main__':
 
     s.enter(60, 1, ingest_train_locations, (s,))
     s.run()
-    # Fetch Red Line train locations
-    # red_line_locations = fetch_train_locations("red")
