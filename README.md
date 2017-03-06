@@ -1,6 +1,7 @@
-cta_location
-===============
-#### Fetch CTA train location data from CTA API and store in MongoDB.
+:steam_locomotive:  cta_location :steam_locomotive:
+====================================================================
+
+#### Fetch train location data from CTA API and store in MongoDB.
 
 ### Setup
 
