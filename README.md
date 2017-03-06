@@ -1,13 +1,12 @@
 :steam_locomotive:  cta_location :steam_locomotive:
 ====================================================================
+## Fetch train location data from CTA API and store in MongoDB.
 
 
 <p align="center">
   <img src="http://www.transitchicago.com/assets/1/maps/Loop-Map-Sep18-19.png" alt="Choo Choo"/>
 </p>
 
-
-## Fetch train location data from CTA API and store in MongoDB.
 
 ### Setup
 
