@@ -4,6 +4,7 @@ from datetime import datetime
 from pymongo import MongoClien
 import requests
 import sched
+import sys
 import time
 
 from env import CTA_API_KEY
@@ -70,13 +71,17 @@ def fetch_train_locations(route_id):
 
 
 if __name__ == '__main__':
+    # Pluck route_id from script arg
+    route_id = sys.argv[1]
+    
+    # Fetch and ingest locations every 60 seconds
     s = sched.scheduler(time.time, time.sleep)
 
     def ingest_train_locations(sc):
         """Call ingestion function."""
         current_time = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
         print "[{}] Ingesting CTA Train Locations...".format(current_time)
-        fetch_train_locations("p")
+        fetch_train_locations(route_id)
         sc.enter(60, 1, ingest_train_locations, (sc,))
 
     s.enter(60, 1, ingest_train_locations, (s,))
