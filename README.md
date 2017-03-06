@@ -1,9 +1,19 @@
 :steam_locomotive:  cta_location :steam_locomotive:
 ====================================================================
 
-#### Fetch train location data from CTA API and store in MongoDB.
+## Fetch train location data from CTA API and store in MongoDB.
 
 ### Setup
+
+#### Install MongoDB via homebrew and start on localhost
+
+```
+> brew install mongodb
+> sudo mkdir -p /data/db
+> sudo mongod
+```
+
+#### Create virtual environment and install python packages
 
 ```
 > git clone git@github.com:fowebb/cta_location.git
@@ -16,13 +26,13 @@
 > vim env.py    <--- add your CTA API key
 ```
 
-### Get train locations for specified Route ID - will fetch/ingest locations every 60 seconds.
+#### Get train locations for specified Route ID - will fetch/ingest locations every 60 seconds.
 
 ```
 python cta_location_gatherer.py route_id
 ```
 
-### Route ID Quick Reference:
+#### Route ID Quick Reference:
 - Red = Red Line (Howard-95th/Dan Ryan service)
 - Blue = Blue Line (O’Hare-Forest Park service)
 - Brn = Brown Line (Kimball-Loop service)
